@@ -40,8 +40,9 @@ nav {
 .logo {
   font-family:'Syne',sans-serif; font-size:1.18rem; font-weight:800;
   letter-spacing:.02em; color:var(--white);
-  display:flex; align-items:center; gap:.45rem; text-decoration:none;
+  display:flex; align-items:center; gap:.6rem; text-decoration:none;
 }
+.logo-img { height:36px; width:auto; object-fit:contain; display:block; }
 .logo-dot { width:7px; height:7px; border-radius:50%; background:var(--accent); flex-shrink:0; }
 .nav-links { display:flex; align-items:center; gap:2.2rem; }
 .nav-link {
@@ -269,12 +270,14 @@ footer {
 
 <!-- NAV -->
 <nav>
-  <a class="logo" href="#"><span class="logo-dot"></span>Brûlée Bahrain</a>
+  <a class="logo" href="#">
+    <img class="logo-img" src="images/logo.jpg" alt="Brûlée Bahrain" />
+  </a>
   <div class="nav-links">
     <a class="nav-link" href="#about">About</a>
     <a class="nav-link" href="#gallery">Gallery</a>
-    <a class="nav-link" href="#">Menu</a>
-    <a class="nav-cta" href="#">Reserve ↗</a>
+    <a class="nav-link" href="https://brulee.invopos.app/Menu?viewOnly=false&menuId=false" target="_blank">Menu</a>
+    <a class="nav-cta" href="https://maps.app.goo.gl/hSu1GR6KbcTfvvFx5" target="_blank">Find Us ↗</a>
   </div>
 </nav>
 
@@ -291,16 +294,16 @@ footer {
       <p class="hero-desc">Handcrafted desserts, specialty coffee, and a space designed to feel like yours — in the heart of Bahrain.</p>
       <div class="hero-btns">
         <a class="btn-fill" href="#about">Our Story</a>
-        <a class="btn-ghost" href="#gallery">See the Menu →</a>
+        <a class="btn-ghost" href="https://brulee.invopos.app/Menu?viewOnly=false&menuId=false" target="_blank">See the Menu →</a>
       </div>
     </div>
     <div class="hero-card">
-      <div class="card-label">Today's Picks</div>
-      <div class="card-row"><span>Brûlée Latte</span><span class="card-price">2.5 BD</span></div>
-      <div class="card-row"><span>Mille-Feuille</span><span class="card-price">4.0 BD</span></div>
-      <div class="card-row"><span>Croissant Sandwich</span><span class="card-price">3.8 BD</span></div>
-      <div class="card-row"><span>Sugar Donuts</span><span class="card-price">3.2 BD</span></div>
-      <div class="card-status"><span class="card-dot"></span>Open now · Adliya</div>
+      <div class="card-label">Best Sellers</div>
+      <div class="card-row"><span>Pain Au Chocolat</span></div>
+      <div class="card-row"><span>Croque Madame</span></div>
+      <div class="card-row"><span>Double Cheese Croissant</span></div>
+      <div class="card-row"><span>Cinnamon Pecan Croissant</span></div>
+      <div class="card-status"><span class="card-dot"></span>Open 8AM–Midnight · Adliya</div>
     </div>
   </div>
 </section>
@@ -408,8 +411,8 @@ footer {
   <div class="footer-links">
     <a href="#about">About</a>
     <a href="#gallery">Gallery</a>
-    <a href="#">Menu</a>
-    <a href="#">Reserve</a>
+    <a href="https://brulee.invopos.app/Menu?viewOnly=false&menuId=false" target="_blank">Menu</a>
+    <a href="https://maps.app.goo.gl/hSu1GR6KbcTfvvFx5" target="_blank">Find Us</a>
   </div>
 </footer>
 
