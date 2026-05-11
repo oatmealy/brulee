@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Brûlée Bahrain</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
+<style>
+/* ── RESET & TOKENS ── */
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+:root {
+  --black:    #0C0B09;
+  --off:      #121108;
+  --dark:     #1B1912;
+  --card:     #221F16;
+  --border:   rgba(255,242,210,0.07);
+  --borderm:  rgba(255,242,210,0.14);
+  --accent:   #E8B86D;
+  --accent-s: rgba(232,184,109,0.10);
+  --accent-m: rgba(232,184,109,0.28);
+  --white:    #F8F3E8;
+  --muted:    rgba(248,243,232,0.46);
+  --faint:    rgba(248,243,232,0.16);
+}
+html  { scroll-behavior: smooth; }
+body  { font-family:'DM Sans',sans-serif; background:var(--black); color:var(--white); overflow-x:hidden; }
+
+/* ── KEYFRAMES ── */
+@keyframes up     { from { opacity:0; transform:translateY(22px); } to { opacity:1; transform:none; } }
+@keyframes ticker { from { transform:translateX(0); } to { transform:translateX(-50%); } }
+
+/* ════ NAV ════ */
+nav {
+  position:fixed; top:0; left:0; right:0; z-index:300;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:1rem 3.5rem;
+  background:rgba(12,11,9,0.82); backdrop-filter:blur(22px);
+  border-bottom:1px solid var(--border);
+}
+.logo {
+  font-family:'Syne',sans-serif; font-size:1.18rem; font-weight:800;
+  letter-spacing:.02em; color:var(--white);
+  display:flex; align-items:center; gap:.45rem; text-decoration:none;
+}
+.logo-dot { width:7px; height:7px; border-radius:50%; background:var(--accent); flex-shrink:0; }
+.nav-links { display:flex; align-items:center; gap:2.2rem; }
+.nav-link {
+  font-size:.75rem; letter-spacing:.15em; text-transform:uppercase;
+  color:var(--muted); text-decoration:none; font-weight:500; transition:color .2s;
+}
+.nav-link:hover { color:var(--white); }
+.nav-cta {
+  font-family:'Syne',sans-serif; font-size:.73rem; font-weight:700;
+  letter-spacing:.13em; text-transform:uppercase;
+  background:var(--accent); color:var(--black);
+  padding:.52rem 1.3rem; border-radius:2px; text-decoration:none; transition:opacity .2s;
+}
+.nav-cta:hover { opacity:.85; }
+
+/* ════ HERO — video bg ════ */
+.hero {
+  position:relative; height:100vh; overflow:hidden;
+  display:flex; align-items:flex-end;
+}
+.hero video {
+  position:absolute; inset:0; width:100%; height:100%;
+  object-fit:cover; filter:brightness(.35) saturate(.75);
+}
+.hero-overlay {
+  position:absolute; inset:0;
+  background:linear-gradient(to top,
+    rgba(12,11,9,.97) 0%,
+    rgba(12,11,9,.22) 55%,
+    rgba(12,11,9,.08) 100%);
+}
+.hero-content {
+  position:relative; z-index:2; width:100%;
+  padding:0 3.5rem 5rem;
+  display:grid; grid-template-columns:1fr 270px; gap:3rem; align-items:flex-end;
+}
+.eyebrow {
+  font-size:.67rem; letter-spacing:.3em; text-transform:uppercase;
+  color:var(--accent); font-weight:500;
+  display:flex; align-items:center; gap:.7rem;
+  margin-bottom:1.3rem;
+  opacity:0; animation:up .9s .1s ease forwards;
+}
+.eyebrow::before { content:''; display:block; width:1.8rem; height:1px; background:var(--accent); }
+h1 {
+  font-family:'Syne',sans-serif;
+  font-size:clamp(3.6rem,6.8vw,6rem);
+  font-weight:800; line-height:.92; letter-spacing:-.025em; color:var(--white);
+  margin-bottom:1.6rem;
+  opacity:0; animation:up .9s .22s ease forwards;
+}
+h1 .stroke { -webkit-text-stroke:1.5px rgba(248,243,232,.5); color:transparent; }
+h1 .gold   { color:var(--accent); }
+.hero-desc {
+  font-size:.97rem; line-height:1.78; color:var(--muted); font-weight:300;
+  max-width:420px; margin-bottom:2rem;
+  opacity:0; animation:up .9s .33s ease forwards;
+}
+.hero-btns {
+  display:flex; gap:1rem; align-items:center;
+  opacity:0; animation:up .9s .44s ease forwards;
+}
+.btn-fill {
+  font-family:'Syne',sans-serif; font-size:.75rem; font-weight:700;
+  letter-spacing:.13em; text-transform:uppercase;
+  background:var(--accent); color:var(--black);
+  padding:.88rem 2.1rem; border-radius:2px; text-decoration:none; transition:opacity .2s;
+}
+.btn-fill:hover { opacity:.85; }
+.btn-ghost {
+  font-size:.74rem; letter-spacing:.12em; text-transform:uppercase; font-weight:500;
+  color:var(--faint); text-decoration:none; display:flex; align-items:center; gap:.4rem; transition:color .2s;
+}
+.btn-ghost:hover { color:var(--white); }
+
+/* floating card */
+.hero-card {
+  background:rgba(27,25,18,.72); border:1px solid var(--borderm); border-radius:14px;
+  padding:1.4rem 1.6rem; backdrop-filter:blur(18px);
+  opacity:0; animation:up .9s .55s ease forwards;
+}
+.card-label { font-size:.63rem; letter-spacing:.2em; text-transform:uppercase; color:var(--muted); margin-bottom:1rem; }
+.card-row {
+  display:flex; align-items:center; justify-content:space-between;
+  padding:.55rem 0; border-bottom:1px solid var(--border);
+  font-size:.85rem; color:var(--white);
+}
+.card-row:last-of-type { border-bottom:none; }
+.card-price { font-family:'Syne',sans-serif; font-size:.78rem; font-weight:700; color:var(--accent); }
+.card-status {
+  display:inline-flex; align-items:center; gap:.35rem;
+  background:rgba(90,200,110,.12); border:1px solid rgba(90,200,110,.28);
+  border-radius:100px; padding:.22rem .7rem;
+  font-size:.63rem; color:#85D9A0; letter-spacing:.07em; margin-top:.9rem;
+}
+.card-dot { width:5px; height:5px; border-radius:50%; background:#85D9A0; }
+
+/* ════ TICKER ════ */
+.ticker-wrap { background:var(--accent); padding:.72rem 0; overflow:hidden; white-space:nowrap; }
+.ticker-inner { display:inline-block; animation:ticker 24s linear infinite; }
+.ticker-inner span {
+  font-family:'Syne',sans-serif; font-size:.74rem; font-weight:700;
+  letter-spacing:.22em; text-transform:uppercase; color:var(--black); margin-right:2.5rem;
+}
+.sep { opacity:.35; margin-right:2.5rem; }
+
+/* ════ ABOUT ════ */
+#about { background:var(--off); padding:7rem 3.5rem; }
+.about-grid { display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:start; }
+.section-label {
+  font-size:.66rem; letter-spacing:.28em; text-transform:uppercase;
+  color:var(--accent); font-weight:500; margin-bottom:.8rem;
+}
+.section-title {
+  font-family:'Syne',sans-serif; font-size:clamp(2rem,3.2vw,2.8rem);
+  font-weight:800; line-height:1.05; letter-spacing:-.015em; color:var(--white);
+  margin-bottom:2rem;
+}
+.section-title em { font-style:italic; color:var(--accent); font-family:'DM Sans',sans-serif; font-weight:300; }
+.about-body { font-size:.97rem; line-height:1.88; color:var(--muted); font-weight:300; margin-bottom:1.1rem; }
+.values { margin-top:2.5rem; border-top:1px solid var(--border); }
+.value-row {
+  display:flex; align-items:center; justify-content:space-between;
+  padding:1rem 0; border-bottom:1px solid var(--border);
+  cursor:default; transition:padding-left .3s;
+}
+.value-row:hover { padding-left:.6rem; }
+.v-left { display:flex; align-items:center; gap:.85rem; }
+.v-num  { font-size:.63rem; letter-spacing:.15em; color:var(--muted); font-weight:500; }
+.v-name { font-family:'Syne',sans-serif; font-size:.95rem; font-weight:700; color:var(--white); }
+.v-arrow { color:var(--accent); opacity:0; transition:opacity .3s; font-size:.9rem; }
+.value-row:hover .v-arrow { opacity:1; }
+
+/* photo grid */
+.about-photos {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  grid-template-rows:300px 200px;
+  gap:.9rem;
+}
+.photo { border-radius:8px; overflow:hidden; }
+.photo img { width:100%; height:100%; object-fit:cover; display:block; transition:transform .5s ease; }
+.photo:hover img { transform:scale(1.04); }
+.photo.tall { grid-row:1/3; }
+
+/* stats */
+.stats-strip {
+  display:grid; grid-template-columns:repeat(4,1fr);
+  gap:.8rem; margin-top:.9rem;
+}
+.stat-card {
+  background:var(--dark); border:1px solid var(--border); border-radius:8px;
+  padding:1.1rem 1.2rem; transition:border-color .3s;
+}
+.stat-card:hover { border-color:var(--accent-m); }
+.stat-n { font-family:'Syne',sans-serif; font-size:1.9rem; font-weight:800; color:var(--accent); line-height:1; margin-bottom:.3rem; }
+.stat-l { font-size:.72rem; color:var(--muted); line-height:1.4; }
+
+/* ════ GALLERY ════ */
+#gallery { background:var(--black); padding:7rem 3.5rem; }
+.gallery-grid {
+  display:grid;
+  grid-template-columns:repeat(12,1fr);
+  grid-template-rows:260px 260px;
+  gap:.9rem;
+  margin-top:2.5rem;
+}
+.g-item { border-radius:8px; overflow:hidden; position:relative; cursor:pointer; }
+.g-item img { width:100%; height:100%; object-fit:cover; display:block; transition:transform .55s ease; }
+.g-item:hover img { transform:scale(1.06); }
+.g-item::after {
+  content:attr(data-label);
+  position:absolute; bottom:1rem; left:1.2rem;
+  font-family:'Syne',sans-serif; font-size:.78rem; font-weight:700;
+  letter-spacing:.08em; color:rgba(248,243,232,0);
+  transition:color .3s;
+}
+.g-item:hover::after { color:var(--white); }
+.g-item::before {
+  content:''; position:absolute; inset:0;
+  background:linear-gradient(to top, rgba(12,11,9,.6) 0%, transparent 50%);
+  opacity:0; transition:opacity .3s;
+}
+.g-item:hover::before { opacity:1; }
+.g1 { grid-column:1/6;  grid-row:1/2; }
+.g2 { grid-column:6/9;  grid-row:1/2; }
+.g3 { grid-column:9/13; grid-row:1/3; }
+.g4 { grid-column:1/5;  grid-row:2/3; }
+.g5 { grid-column:5/9;  grid-row:2/3; }
+
+/* ════ QUOTE BREAK ════ */
+.quote-section {
+  background:var(--off); padding:5rem 3.5rem; text-align:center;
+  border-top:1px solid var(--border); border-bottom:1px solid var(--border);
+}
+.big-quote {
+  font-family:'Syne',sans-serif; font-size:clamp(1.6rem,3vw,2.8rem);
+  font-weight:800; line-height:1.15; letter-spacing:-.01em; color:var(--white);
+  max-width:780px; margin:0 auto 1.2rem;
+}
+.big-quote em { font-style:italic; color:var(--accent); font-family:'DM Sans',sans-serif; font-weight:300; }
+.quote-sub { font-size:.8rem; color:var(--muted); font-weight:300; letter-spacing:.06em; }
+
+/* ════ FOOTER ════ */
+footer {
+  background:var(--off); border-top:1px solid var(--border);
+  padding:2.2rem 3.5rem;
+  display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1rem;
+}
+.footer-logo {
+  font-family:'Syne',sans-serif; font-size:1.05rem; font-weight:800;
+  color:var(--white); display:flex; align-items:center; gap:.4rem;
+}
+.footer-logo .dot { width:6px; height:6px; border-radius:50%; background:var(--accent); }
+.footer-copy { font-size:.75rem; color:var(--muted); font-weight:300; }
+.footer-links { display:flex; gap:2rem; }
+.footer-links a {
+  font-size:.72rem; letter-spacing:.1em; text-transform:uppercase;
+  color:var(--muted); text-decoration:none; transition:color .2s; font-weight:500;
+}
+.footer-links a:hover { color:var(--accent); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="logo" href="#"><span class="logo-dot"></span>Brûlée Bahrain</a>
+  <div class="nav-links">
+    <a class="nav-link" href="#about">About</a>
+    <a class="nav-link" href="#gallery">Gallery</a>
+    <a class="nav-link" href="#">Menu</a>
+    <a class="nav-cta" href="#">Reserve ↗</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <video autoplay muted loop playsinline>
+    <source src="video/bruleebackground.mp4" type="video/mp4" />
+  </video>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div>
+      <div class="eyebrow">Artisan Café · Manama, Bahrain</div>
+      <h1>Taste<br><span class="stroke">the</span><br><span class="gold">Moment.</span></h1>
+      <p class="hero-desc">Handcrafted desserts, specialty coffee, and a space designed to feel like yours — in the heart of Bahrain.</p>
+      <div class="hero-btns">
+        <a class="btn-fill" href="#about">Our Story</a>
+        <a class="btn-ghost" href="#gallery">See the Menu →</a>
+      </div>
+    </div>
+    <div class="hero-card">
+      <div class="card-label">Today's Picks</div>
+      <div class="card-row"><span>Brûlée Latte</span><span class="card-price">2.5 BD</span></div>
+      <div class="card-row"><span>Mille-Feuille</span><span class="card-price">4.0 BD</span></div>
+      <div class="card-row"><span>Croissant Sandwich</span><span class="card-price">3.8 BD</span></div>
+      <div class="card-row"><span>Sugar Donuts</span><span class="card-price">3.2 BD</span></div>
+      <div class="card-status"><span class="card-dot"></span>Open now · Adliya</div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker-inner">
+    <span>Crème Brûlée</span><span class="sep">✦</span>
+    <span>Specialty Coffee</span><span class="sep">✦</span>
+    <span>Artisan Pastries</span><span class="sep">✦</span>
+    <span>Manama Bahrain</span><span class="sep">✦</span>
+    <span>Open Daily</span><span class="sep">✦</span>
+    <span>Handcrafted Fresh</span><span class="sep">✦</span>
+    <span>Crème Brûlée</span><span class="sep">✦</span>
+    <span>Specialty Coffee</span><span class="sep">✦</span>
+    <span>Artisan Pastries</span><span class="sep">✦</span>
+    <span>Manama Bahrain</span><span class="sep">✦</span>
+    <span>Open Daily</span><span class="sep">✦</span>
+    <span>Handcrafted Fresh</span><span class="sep">✦</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-grid">
+    <div>
+      <div class="section-label">About Us</div>
+      <h2 class="section-title">We didn't open a café.<br>We built a <em>feeling.</em></h2>
+      <p class="about-body">Brûlée Bahrain was born from a restless obsession — why can't a great dessert café feel genuinely cool? We wanted somewhere Bahrain could call its own. Not a copy of something from abroad, but something made here, for here.</p>
+      <p class="about-body">Every item on our menu is made from scratch, every morning. French technique meets local flavour — saffron crème brûlée, cardamom mille-feuille, and a brûlée latte you'll be thinking about for days.</p>
+      <div class="values">
+        <div class="value-row">
+          <div class="v-left"><span class="v-num">01</span><span class="v-name">Made Fresh, Every Day</span></div>
+          <span class="v-arrow">→</span>
+        </div>
+        <div class="value-row">
+          <div class="v-left"><span class="v-num">02</span><span class="v-name">Local Flavour, Global Craft</span></div>
+          <span class="v-arrow">→</span>
+        </div>
+        <div class="value-row">
+          <div class="v-left"><span class="v-num">03</span><span class="v-name">A Space That Feels Like Yours</span></div>
+          <span class="v-arrow">→</span>
+        </div>
+        <div class="value-row">
+          <div class="v-left"><span class="v-num">04</span><span class="v-name">Community First, Always</span></div>
+          <span class="v-arrow">→</span>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="about-photos">
+        <div class="photo tall">
+          <img src="images/b3.jpg" alt="Brûlée branded drinks and croissant" />
+        </div>
+        <div class="photo">
+          <img src="images/b1.jpg" alt="Artisan sugar donuts" />
+        </div>
+        <div class="photo">
+          <img src="images/b2.jpg" alt="Café table spread" />
+        </div>
+      </div>
+      <div class="stats-strip">
+        <div class="stat-card"><div class="stat-n">40+</div><div class="stat-l">Menu items made daily</div></div>
+        <div class="stat-card"><div class="stat-n">5★</div><div class="stat-l">Guest rating</div></div>
+        <div class="stat-card"><div class="stat-n">3yr</div><div class="stat-l">Serving Manama</div></div>
+        <div class="stat-card"><div class="stat-n">100%</div><div class="stat-l">Handcrafted always</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="section-label">The Food</div>
+  <h2 class="section-title">Crafted to be <em>remembered.</em></h2>
+  <div class="gallery-grid">
+    <div class="g-item g1" data-label="Sugar Donuts">
+      <img src="images/b1.jpg" alt="Sugar donuts" />
+    </div>
+    <div class="g-item g2" data-label="Café Spread">
+      <img src="images/b2.jpg" alt="Café table spread" />
+    </div>
+    <div class="g-item g3" data-label="Brûlée Drinks">
+      <img src="images/b3.jpg" alt="Brûlée branded drinks" />
+    </div>
+    <div class="g-item g4" data-label="Croissant Sandwich">
+      <img src="images/b4.webp" alt="Croissant sandwich" />
+    </div>
+    <div class="g-item g5" data-label="Artisan Pastries">
+      <img src="images/b2.jpg" alt="Pastries on table" />
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE -->
+<div class="quote-section">
+  <p class="big-quote">"Dessert should be an <em>experience</em>,<br>not an afterthought."</p>
+  <p class="quote-sub">— The Brûlée Bahrain Philosophy</p>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo"><span class="dot"></span>Brûlée Bahrain</div>
+  <div class="footer-copy">© 2025 Brûlée Bahrain · Adliya, Manama, Kingdom of Bahrain</div>
+  <div class="footer-links">
+    <a href="#about">About</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#">Menu</a>
+    <a href="#">Reserve</a>
+  </div>
+</footer>
+
+</body>
+</html>
