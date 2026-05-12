@@ -18,6 +18,8 @@
   --accent:   #E8B86D;
   --accent-s: rgba(232,184,109,0.10);
   --accent-m: rgba(232,184,109,0.28);
+  --green:    #7c8d69;
+  --green-s:  rgba(124,141,105,0.15);
   --white:    #F8F3E8;
   --muted:    rgba(248,243,232,0.46);
   --faint:    rgba(248,243,232,0.16);
@@ -81,12 +83,12 @@ nav {
 }
 .eyebrow {
   font-size:.67rem; letter-spacing:.3em; text-transform:uppercase;
-  color:var(--accent); font-weight:500;
+  color:var(--green); font-weight:500;
   display:flex; align-items:center; gap:.7rem;
   margin-bottom:1.3rem;
   opacity:0; animation:up .9s .1s ease forwards;
 }
-.eyebrow::before { content:''; display:block; width:1.8rem; height:1px; background:var(--accent); }
+.eyebrow::before { content:''; display:block; width:1.8rem; height:1px; background:var(--green); }
 h1 {
   font-family:'Syne',sans-serif;
   font-size:clamp(3.6rem,6.8vw,6rem);
@@ -116,7 +118,7 @@ h1 .gold   { color:var(--accent); }
   font-size:.74rem; letter-spacing:.12em; text-transform:uppercase; font-weight:500;
   color:var(--faint); text-decoration:none; display:flex; align-items:center; gap:.4rem; transition:color .2s;
 }
-.btn-ghost:hover { color:var(--white); }
+.btn-ghost:hover { color:var(--green); }
 
 /* floating card */
 .hero-card {
@@ -134,11 +136,11 @@ h1 .gold   { color:var(--accent); }
 .card-price { font-family:'Syne',sans-serif; font-size:.78rem; font-weight:700; color:var(--accent); }
 .card-status {
   display:inline-flex; align-items:center; gap:.35rem;
-  background:rgba(90,200,110,.12); border:1px solid rgba(90,200,110,.28);
+  background:var(--green-s); border:1px solid rgba(124,141,105,.38);
   border-radius:100px; padding:.22rem .7rem;
-  font-size:.63rem; color:#85D9A0; letter-spacing:.07em; margin-top:.9rem;
+  font-size:.63rem; color:var(--green); letter-spacing:.07em; margin-top:.9rem;
 }
-.card-dot { width:5px; height:5px; border-radius:50%; background:#85D9A0; }
+.card-dot { width:5px; height:5px; border-radius:50%; background:var(--green); }
 
 /* ════ TICKER ════ */
 .ticker-wrap { background:var(--accent); padding:.72rem 0; overflow:hidden; white-space:nowrap; }
@@ -147,14 +149,14 @@ h1 .gold   { color:var(--accent); }
   font-family:'Syne',sans-serif; font-size:.74rem; font-weight:700;
   letter-spacing:.22em; text-transform:uppercase; color:var(--black); margin-right:2.5rem;
 }
-.sep { opacity:.35; margin-right:2.5rem; }
+.sep { opacity:.5; margin-right:2.5rem; color:var(--green); }
 
 /* ════ ABOUT ════ */
 #about { background:var(--off); padding:7rem 3.5rem; }
 .about-grid { display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:start; }
 .section-label {
   font-size:.66rem; letter-spacing:.28em; text-transform:uppercase;
-  color:var(--accent); font-weight:500; margin-bottom:.8rem;
+  color:var(--green); font-weight:500; margin-bottom:.8rem;
 }
 .section-title {
   font-family:'Syne',sans-serif; font-size:clamp(2rem,3.2vw,2.8rem);
@@ -169,9 +171,9 @@ h1 .gold   { color:var(--accent); }
   padding:1rem 0; border-bottom:1px solid var(--border);
   cursor:default; transition:padding-left .3s;
 }
-.value-row:hover { padding-left:.6rem; }
+.value-row:hover { padding-left:.6rem; border-left:2px solid var(--green); }
 .v-left { display:flex; align-items:center; gap:.85rem; }
-.v-num  { font-size:.63rem; letter-spacing:.15em; color:var(--muted); font-weight:500; }
+.v-num  { font-size:.63rem; letter-spacing:.15em; color:var(--green); font-weight:500; }
 .v-name { font-family:'Syne',sans-serif; font-size:.95rem; font-weight:700; color:var(--white); }
 .v-arrow { color:var(--accent); opacity:0; transition:opacity .3s; font-size:.9rem; }
 .value-row:hover .v-arrow { opacity:1; }
@@ -197,7 +199,7 @@ h1 .gold   { color:var(--accent); }
   background:var(--dark); border:1px solid var(--border); border-radius:8px;
   padding:1.1rem 1.2rem; transition:border-color .3s;
 }
-.stat-card:hover { border-color:var(--accent-m); }
+.stat-card:hover { border-color:rgba(124,141,105,0.45); }
 .stat-n { font-family:'Syne',sans-serif; font-size:1.9rem; font-weight:800; color:var(--accent); line-height:1; margin-bottom:.3rem; }
 .stat-l { font-size:.72rem; color:var(--muted); line-height:1.4; }
 
@@ -243,7 +245,7 @@ h1 .gold   { color:var(--accent); }
   font-weight:800; line-height:1.15; letter-spacing:-.01em; color:var(--white);
   max-width:780px; margin:0 auto 1.2rem;
 }
-.big-quote em { font-style:italic; color:var(--accent); font-family:'DM Sans',sans-serif; font-weight:300; }
+.big-quote em { font-style:italic; color:var(--green); font-family:'DM Sans',sans-serif; font-weight:300; }
 .quote-sub { font-size:.8rem; color:var(--muted); font-weight:300; letter-spacing:.06em; }
 
 /* ════ FOOTER ════ */
@@ -263,7 +265,7 @@ footer {
   font-size:.72rem; letter-spacing:.1em; text-transform:uppercase;
   color:var(--muted); text-decoration:none; transition:color .2s; font-weight:500;
 }
-.footer-links a:hover { color:var(--accent); }
+.footer-links a:hover { color:var(--green); }
 
 /* ════ MOBILE ════ */
 @media (max-width: 768px) {
@@ -302,6 +304,8 @@ footer {
   .quote-section { padding:3.5rem 1.4rem; }
   .big-quote { font-size:clamp(1.3rem,5vw,2rem); }
 
+  .logo-img { height:80px; }
+
   footer { padding:2rem 1.4rem; flex-direction:column; align-items:flex-start; gap:.8rem; }
   .footer-links { flex-wrap:wrap; gap:1.2rem; }
 }
@@ -334,7 +338,7 @@ footer {
       <h1>Taste<br><span class="stroke">the</span><br><span class="gold">Moment.</span></h1>
       <p class="hero-desc">Handcrafted desserts, specialty coffee, and a space designed to feel like yours — in the heart of Bahrain.</p>
       <div class="hero-btns">
-        <a class="btn-fill" href="#about">Our Story</a>
+        <a class="btn-fill" href="tel:17005575">Book a Table</a>
         <a class="btn-ghost" href="https://brulee.invopos.app/Menu?viewOnly=false&menuId=false" target="_blank">See the Menu →</a>
       </div>
     </div>
